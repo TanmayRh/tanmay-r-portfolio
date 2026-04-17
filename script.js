@@ -96,36 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Typing effect code removed.
 
 
-    // --- 5. EASTER EGG ---
-    const eggTrigger = document.getElementById("easter-egg-trigger");
-    const secretModal = document.getElementById("secret-modal");
-    const modalBackdrop = document.getElementById("modal-backdrop");
-    const modalCloseBtn = document.getElementById("modal-close-btn");
-    const starHint = document.getElementById("star-hint");
-
-    const openModal = () => {
-        secretModal.classList.remove("active");
-        modalBackdrop.classList.remove("active");
-        void secretModal.offsetWidth; // force reflow to restart animations
-        secretModal.classList.add("active");
-        modalBackdrop.classList.add("active");
-        // Hide the hint arrow once they've discovered it
-        starHint.classList.add("hidden");
-    };
-
-    const closeModal = () => {
-        secretModal.classList.remove("active");
-        modalBackdrop.classList.remove("active");
-        // Bring the hint arrow back so they can find it again
-        starHint.classList.remove("hidden");
-    };
-
-    eggTrigger.addEventListener("click", openModal);
-    modalCloseBtn.addEventListener("click", closeModal);
-    modalBackdrop.addEventListener("click", closeModal);
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-    });
+    // --- 5. THE SECRET ZONE SECTION ---
+    // The secret area is now a permanent section, no logic needed for modal opening.
 
 
     // --- 6. SUGGESTION BOX (Live Feed) ---
@@ -163,53 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. EASTER EYES (cursor‑following) ---
-    const eyes = document.querySelector('.easter-eyes');
-    if (eyes) {
-        const pupils = eyes.querySelectorAll('.pupil');
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        document.addEventListener('mousemove', e => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        function updateEyes() {
-            pupils.forEach(pupil => {
-                const eye = pupil.parentElement;
-                const rect = eye.getBoundingClientRect();
-                const cx = rect.left + rect.width / 2;
-                const cy = rect.top + rect.height / 2;
-                const dx = mouseX - cx;
-                const dy = mouseY - cy;
-                const angle = Math.atan2(dy, dx);
-                const radius = 6; // max travel
-                const targetX = Math.cos(angle) * radius;
-                const targetY = Math.sin(angle) * radius;
-                const style = getComputedStyle(pupil);
-                const matrix = new DOMMatrixReadOnly(style.transform);
-                const curX = matrix.m41;
-                const curY = matrix.m42;
-                const lerp = (a, b, t) => a + (b - a) * t;
-                const newX = lerp(curX, targetX, 0.07);
-                const newY = lerp(curY, targetY, 0.07);
-                pupil.style.transform = `translate(${newX}px, ${newY}px)`;
-            });
-            requestAnimationFrame(updateEyes);
-        }
-        requestAnimationFrame(updateEyes);
-        // Random blinking
-        function scheduleBlink() {
-            const interval = 3000 + Math.random() * 3000; // 3‑6 s
-            setTimeout(() => {
-                eyes.querySelectorAll('.eye').forEach(e => e.classList.add('blink'));
-                setTimeout(() => {
-                    eyes.querySelectorAll('.eye').forEach(e => e.classList.remove('blink'));
-                }, 200);
-                scheduleBlink();
-            }, interval);
-        }
-        scheduleBlink();
-    }
+
 
 
     // --- 7. COPY TO CLIPBOARD (Contact) ---
@@ -230,10 +156,126 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Back to top
-    document.getElementById("scroll-top").addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    // --- 8. MAGNETIC CURSOR EFFECT ---
+    const magneticElements = document.querySelectorAll(".magnetic-wrap");
+    magneticElements.forEach(wrap => {
+        wrap.addEventListener("mousemove", (e) => {
+            const rect = wrap.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Move the button slightly toward the mouse
+            wrap.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            
+            // Move the cursor glow toward the button
+            glowX = lerp(glowX, rect.left + rect.width / 2, 0.2);
+            glowY = lerp(glowY, rect.top + rect.height / 2, 0.2);
+        });
+        
+        wrap.addEventListener("mouseleave", () => {
+            wrap.style.transform = `translate(0px, 0px)`;
+        });
     });
+
+    // --- 9. 3D TILT EFFECT ---
+    const tiltCards = document.querySelectorAll(".tilt-card");
+    tiltCards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+        });
+    // --- 10. AMBIENT DUST GENERATION ---
+    const dustContainer = document.getElementById("ambient-dust");
+    const createDust = () => {
+        for (let i = 0; i < 40; i++) {
+            const dust = document.createElement("div");
+            dust.className = "dust-particle";
+            const size = Math.random() * 4 + 1;
+            dust.style.width = `${size}px`;
+            dust.style.height = `${size}px`;
+            dust.style.left = `${Math.random() * 100}%`;
+            dust.style.top = `${Math.random() * 100}%`;
+            dustContainer.appendChild(dust);
+            
+            // Subtle random movement
+            animateDustRandomly(dust);
+        }
+    };
+
+    function animateDustRandomly(el) {
+        const x = (Math.random() - 0.5) * 100;
+        const y = (Math.random() - 0.5) * 100;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+        setTimeout(() => animateDustRandomly(el), 3000 + Math.random() * 5000);
+    }
+
+    if (dustContainer) createDust();
+
+    // Move dust based on mouse
+    window.addEventListener("mousemove", (e) => {
+        const particles = document.querySelectorAll(".dust-particle");
+        particles.forEach(p => {
+            const speed = parseFloat(p.style.width) * 2;
+            const x = (window.innerWidth - e.pageX * speed) / 100;
+            const y = (window.innerHeight - e.pageY * speed) / 100;
+            p.style.marginLeft = `${x}px`;
+            p.style.marginTop = `${y}px`;
+        });
+    });
+
+    // --- 11. SCROLL REVEAL (Advanced) ---
+    const revealItems = document.querySelectorAll(".glass-card, .bento-card, .game-item, .hologram-card");
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add a staggered delay
+                setTimeout(() => {
+                    entry.target.classList.add("revealed");
+                }, index * 100);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealItems.forEach(item => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(30px)";
+        item.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        revealObserver.observe(item);
+    });
+
+    // Add CSS for revealed state dynamically or via CSS file
+    const style = document.createElement("style");
+    style.textContent = ".revealed { opacity: 1 !important; transform: translateY(0) !important; }";
+    document.head.appendChild(style);
+
+    // Initial check for non-JS users or immediate view
+    document.querySelectorAll(".glass-card").forEach(c => c.classList.add("revealed"));
+
+    // Back to top
+    const scrollTopBtn = document.getElementById("scroll-top");
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener("click", () => {
+            const intro = document.getElementById("intro");
+            if (intro) {
+                intro.scrollIntoView({ behavior: "smooth" });
+            } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    }
 });
 
 

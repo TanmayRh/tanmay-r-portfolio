@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanmay Rathi | Building cool things that feel alive</title>
+    <title>Tanmay Rathi | Portfolio | Enthusiastic Builder & Designer (CLASS 8)</title>
+    <meta name="description" content="Official portfolio of Tanmay Rathi, a Class 8 student and enthusiastic builder creating alive, modern digital experiences and cool things.">
+    <meta name="keywords" content="Tanmay Rathi, Tanmay Rathi Portfolio, Class 8 Developer, Student Builder, Modern Web Design">
+    
+    <!-- Social Preview (Open Graph) -->
+    <meta property="og:title" content="Tanmay Rathi | Enthusiastic Builder">
+    <meta property="og:description" content="Exploring the intersection of chaos and technical precision. Check out my latest projects and games.">
+    <meta property="og:image" content="profile.png">
+    <meta property="og:url" content="https://tanmayrh.github.io/tanmay-r-portfolio/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Modern Geometry & Playful typography -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -14,6 +24,9 @@
     <div id="cursor"></div>
     <div id="cursor-glow"></div>
 
+    <!-- Ambient Dust -->
+    <div id="ambient-dust"></div>
+
     <!-- Background Elements -->
     <div id="background-layer">
         <div class="gradient-ball ball-1"></div>
@@ -22,31 +35,38 @@
         <div id="particles"></div>
     </div>
 
-    <!-- Floating Theme Switcher -->
-    <button id="theme-switcher" class="single-theme-btn" aria-label="Toggle Theme"></button>
+    <!-- Floating Top Controls -->
+        <div id="top-controls" style="position: fixed; top: 1.8rem; right: 2rem; display: flex; gap: 1rem; align-items: center; z-index: 500;">
+            <!-- Magnetic Audio -->
+            <div class="magnetic-wrap">
+                <div id="audio-player" class="glass-panel" style="position: relative; bottom: auto; left: auto; padding: 0.5rem 1rem; border-radius: var(--border-radius-md); min-width: auto; flex-direction: row; gap: 1rem;">
+                    <div class="audio-info">
+                        <span class="music-icon">🎵</span>
+                        <span class="track-name" style="font-size: 0.8rem;">Sweater Weather</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button id="prev-btn" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+                        </button>
+                        <button id="play-pause-btn" aria-label="Play/Pause">
+                            <svg id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="active"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <svg id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        </button>
+                        <button id="next-btn" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+                        </button>
+                        <button id="toggle-power-btn" aria-label="Power" class="power-on">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Minimal Audio Player -->
-    <div id="audio-player" class="glass-panel">
-        <div class="audio-info">
-            <span class="music-icon">🎵</span>
-            <span class="track-name">Sweater Weather</span>
+            <!-- Magnetic Theme Switcher -->
+            <div class="magnetic-wrap">
+                <button id="theme-switcher" class="single-theme-btn" aria-label="Toggle Theme" style="position: relative; top: auto; right: auto; margin: 0;"></button>
+            </div>
         </div>
-        <div class="audio-controls">
-            <button id="prev-btn" aria-label="Previous">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
-            </button>
-            <button id="play-pause-btn" aria-label="Play/Pause">
-                <svg id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="active"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                <svg id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-            </button>
-            <button id="next-btn" aria-label="Next">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
-            </button>
-            <button id="toggle-power-btn" aria-label="Power" class="power-on">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-            </button>
-        </div>
-    </div>
     <!-- Hidden Youtube Player iframe placeholder -->
     <div id="yt-player"></div>
 
@@ -56,19 +76,19 @@
         <section id="intro" class="section">
             <div class="hero-container">
                 <div class="hero-text glass-card float-anim-1">
+                    <p style="font-size: 0.8rem; letter-spacing: 2px; color: var(--accent); margin-bottom: -5px; font-weight: 600;">CLASS 8</p>
                     <span class="greeting">Hey, I'm</span>
-                    <h1 class="name-glitch" data-text="Tanmay Rathi">Tanmay Rathi</h1>
+                    <h1 class="glitch-wrapper">
+                        <span class="glitch-text" data-text="Tanmay Rathi">Tanmay Rathi</span>
+                    </h1>
                     <div class="typing-container">
                         <span id="typing-text">Just build different.</span>
                     </div>
-                    <p class="tagline">"Building cool things that feel alive."</p>
+                    <p class="tagline">"enthusiastic user & builder"</p>
                     <a href="#about" class="action-btn">Scroll to see more <span>↓</span></a>
                 </div>
-                <div class="hero-image glass-card float-anim-2">
-                    <div class="image-placeholder">
-                        <div class="hologram-effect"></div>
-                        <span>[ Profile Target ]</span>
-                    </div>
+                <div class="hero-image glass-card float-anim-2" style="padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img src="profile.png" alt="Profile Target" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block;">
                 </div>
             </div>
         </section>
@@ -77,61 +97,32 @@
         <section id="interests" class="section">
             <h2 class="section-badge">/ interests</h2>
             <div class="bento-grid">
-                <div class="bento-card tech-card float-anim-3">
-                    <div class="icon">💻</div>
-                    <h3>Tech & Code</h3>
-                    <p>Writing logic that renders beauty. I live in the inspector and command line, crafting modern web experiences.</p>
-                </div>
-                <div class="bento-card design-card float-anim-1">
-                    <div class="icon">✨</div>
-                    <h3>Design</h3>
-                    <p>Obsessed with pixels, fonts, spacing, and the psychology behind visual storytelling.</p>
-                </div>
-                <div class="bento-card ai-card float-anim-2">
-                    <div class="icon">🤖</div>
-                    <h3>AI & Future</h3>
-                    <p>Exploring prompt engineering, automating tasks, and building alongside the machines.</p>
-                </div>
-                <div class="bento-card games-card float-anim-4">
-                    <div class="icon">🎮</div>
-                    <h3>Internet Culture</h3>
-                    <p>Part-time gamer, full-time internet dweller. Minecraft redstone enthusiast & meme architecture scholar.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: WHAT I'M ABOUT -->
-        <section id="about" class="section">
-            <h2 class="section-badge">/ what i'm about</h2>
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-                <div class="timeline-item glass-card right">
-                    <div class="dot"></div>
-                    <div class="content">
-                        <h3>Vision Zero</h3>
-                        <p>I don't just want things to work. I want them to feel like magic. Every interaction is a conversation with the user.</p>
+                <div class="bento-card tech-card float-anim-3 glass-card tilt-card">
+                    <div class="tilt-inner">
+                        <div class="icon">🏸</div>
+                        <h3>Badminton</h3>
+                        <p>Smashing shuttlecocks with precision and speed. The court is where I find focus and burn off extra energy.</p>
                     </div>
                 </div>
-                <div class="timeline-item glass-card left">
-                    <div class="dot"></div>
-                    <div class="content">
-                        <h3>Creative Philosophy</h3>
-                        <p>Constraint breeds creativity. Give me 3 colors and a tight deadline over an infinite canvas any day.</p>
-                        <div class="progress-bar-container">
-                            <span class="label">Chaos vs Order</span>
-                            <div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div>
-                        </div>
+                <div class="bento-card design-card float-anim-1 glass-card tilt-card">
+                    <div class="tilt-inner">
+                        <div class="icon">♟️</div>
+                        <h3>Chess</h3>
+                        <p>Just started playing and is at 670 elo. Still hanging pieces, but enjoying the strategic depth and occasional brilliant move.</p>
                     </div>
                 </div>
-                <div class="timeline-item glass-card right">
-                    <div class="dot"></div>
-                    <div class="content">
-                        <h3>Execution > Ideas</h3>
-                        <p>Ideas are cheap, building the thing is the hard part. I choose to be a builder.</p>
-                        <div class="progress-bar-container">
-                            <span class="label">Coffee Intake</span>
-                            <div class="progress-track"><div class="progress-fill fill-glow" style="width: 95%;"></div></div>
-                        </div>
+                <div class="bento-card ai-card float-anim-2 glass-card tilt-card">
+                    <div class="tilt-inner">
+                        <div class="icon">🦾</div>
+                        <h3>Robotics</h3>
+                        <p>Building the physical world with code. Fascinated by the intersection of software and hardware.</p>
+                    </div>
+                </div>
+                <div class="bento-card games-card float-anim-4 glass-card tilt-card">
+                    <div class="tilt-inner">
+                        <div class="icon">🎸</div>
+                        <h3>Guitar</h3>
+                        <p>Strumming away my free time. Music is the universal language, and there's nothing quite like nailing a tough riff.</p>
                     </div>
                 </div>
             </div>
@@ -151,7 +142,7 @@
                 <div class="flip-card">
                     <div class="flip-inner">
                         <div class="flip-front glass-card">Fact #02</div>
-                        <div class="flip-back glass-card">My favorite hex code changes depending on my caffeine levels.</div>
+                        <div class="flip-back glass-card">I am just like glass, if they break me, I cut them.</div>
                     </div>
                 </div>
                 <div class="flip-card">
@@ -163,101 +154,124 @@
             </div>
         </section>
 
-        <!-- EASTER EGG CONTAINER (Scrolls with page) -->
-        <div class="easter-egg-wrapper">
-            <!-- Hidden star trigger -->
-            <div id="easter-egg-trigger" class="hidden-star">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-
-            <!-- Hint arrow pointing to the star -->
-            <div id="star-hint">
-                <svg class="hint-arrow" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Arrow shaft -->
-                    <path d="M38 10 L6 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                    <!-- Arrowhead pointing left -->
-                    <path d="M12 4 L4 10 L12 16" stroke="currentColor" stroke-width="2.5"
-                        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-                <span class="hint-label">click it</span>
-            </div>
-        </div>
-
-
-        <!-- Modal Backdrop -->
-        <div id="modal-backdrop"></div>
-
-        <!-- Secret Modal (Easter Egg) -->
-        <div id="secret-modal" class="glass-card">
-            <div class="modal-close" id="modal-close-btn">&times;</div>
-            <p class="egg-found-label">✦ you found it</p>
-            <div class="easter-egg-content">
-
-                <!-- LEFT: Hand-drawn SVG Arrow -->
-                <div class="egg-arrow-side">
-                    <svg class="arrow-svg" viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <!-- Main curved arrow body (hand-drawn style bezier) -->
-                        <path class="arrow-path"
-                            d="M12 88 C18 82 28 60 42 46 C56 32 78 28 106 42"
-                            stroke="currentColor" stroke-width="2.8"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            fill="none"
-                        />
-                        <!-- Arrowhead (slightly imperfect angle) -->
-                        <path class="arrow-head"
-                            d="M92 30 L108 43 L96 58"
-                            stroke="currentColor" stroke-width="2.8"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            fill="none"
-                        />
-                    </svg>
-                    <span class="egg-scan-hint">scan me</span>
-                </div>
-
-                <!-- RIGHT: QR Code -->
-                <div class="egg-qr-side">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" class="qr-link">
-                        <div class="qr-wrapper">
-                            <img
-                                src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/watch?v=dQw4w9WgXcQ&margin=8&color=000000&bgcolor=ffffff"
-                                alt="QR Code to a surprise"
-                                class="qr-img"
-                                width="160"
-                                height="160"
-                            />
+        <!-- SECTION 5: GAMES I LOVED -->
+        <section id="games" class="section">
+            <h2 class="section-badge">/ games i loved</h2>
+            <div class="games-grid">
+                <div class="game-item glass-card float-anim-1 tilt-card">
+                    <div class="tilt-inner">
+                        <div class="game-img-wrapper">
+                            <img src="coc.png" alt="Clash of Clans" class="game-img">
                         </div>
-                        <p class="egg-caption">click for a surprise</p>
-                    </a>
+                        <div class="game-info">
+                            <h3>Clash of Clans</h3>
+                            <p class="game-desc">
+                                • Rewards patience<br>
+                                • Long-term discipline<br>
+                                • Strategic resource building
+                            </p>
+                        </div>
+                    </div>
                 </div>
-
+                <div class="game-item glass-card float-anim-2 tilt-card">
+                    <div class="tilt-inner">
+                        <div class="game-img-wrapper">
+                            <img src="chess.png" alt="Chess" class="game-img">
+                        </div>
+                        <div class="game-info">
+                            <h3>Chess</h3>
+                            <p class="game-desc">
+                                • Rewards extreme focus<br>
+                                • Forward-thinking<br>
+                                • Analytical problem-solving
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-item glass-card float-anim-3 tilt-card">
+                    <div class="tilt-inner">
+                        <div class="game-img-wrapper">
+                            <img src="minecraft.png" alt="Minecraft" class="game-img">
+                        </div>
+                        <div class="game-info">
+                            <h3>Minecraft</h3>
+                            <p class="game-desc">
+                                • Rewards boundless creativity<br>
+                                • Architectural logic<br>
+                                • Relentless exploration
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- SECTION 5.5: THE SECRET ZONE -->
+        <section id="secret-zone" class="section">
+            <h2 class="section-badge">/ the secret zone</h2>
+            
+            <div class="hologram-card tilt-card">
+                <div class="tilt-inner">
+                    <div class="secret-layout">
+                        <!-- Scan Suggestion -->
+                        <div class="egg-arrow-side">
+                            <svg class="arrow-svg" viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 120px; color: var(--accent); filter: drop-shadow(0 0 10px var(--accent));">
+                                <path class="arrow-path" d="M12 88 C18 82 28 60 42 46 C56 32 78 28 106 42" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <path class="arrow-head" d="M92 30 L108 43 L96 58" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                            <p style="color: var(--accent); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 1rem; font-size: 0.75rem;">Scan this</p>
+                        </div>
+
+                        <!-- Premium QR Code -->
+                        <div class="egg-qr-side">
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" class="qr-link">
+                                <div class="qr-premium-wrapper">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/watch?v=dQw4w9WgXcQ&margin=8&color=000000&bgcolor=ffffff" alt="Secret Surprise QR">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="secret-desc">
+                        <p>Congratulations. You've uncovered a fragment of the code. This QR leads to a small piece of digital nostalgia. Click or scan at your own risk.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- SECTION 6: ENDORSEMENTS -->
         <section id="endorsements" class="section">
             <h2 class="section-badge">/ endorsements</h2>
             <div class="horizontal-scroll-container">
                 <div class="scroll-track">
-                    <div class="endorsement-card glass-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Insane eye for detail. The UI feels like butter."</p>
-                        <div class="author">— Ajitesh, Developer</div>
+                    <div class="endorsement-card glass-card tilt-card">
+                        <div class="tilt-inner">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Insane eye for detail. The UI feels like butter."</p>
+                            <div class="author">— Ajitesh, Developer</div>
+                        </div>
                     </div>
-                    <div class="endorsement-card glass-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"They made our project 10x cooler in half the time."</p>
-                        <div class="author">— Vaibhav, Designer</div>
+                    <div class="endorsement-card glass-card tilt-card">
+                        <div class="tilt-inner">
+                            <div class="stars">⭐⭐⭐⭐★</div>
+                            <p>"A bright and enthusiastic star, made to change the whole world"</p>
+                            <div class="author">— Vaibhav, Designer</div>
+                        </div>
                     </div>
-                    <div class="endorsement-card glass-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"A rare mix of creative chaos and technical precision."</p>
-                        <div class="author">— Placeholder Jane</div>
+                    <div class="endorsement-card glass-card tilt-card">
+                        <div class="tilt-inner">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"A rare mix of creative chaos and technical precision."</p>
+                            <div class="author">— Saaj, Creative Lead</div>
+                        </div>
                     </div>
                     <!-- Cloned for infinite loop -->
-                    <div class="endorsement-card glass-card" aria-hidden="true">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Insane eye for detail. The UI feels like butter."</p>
-                        <div class="author">— Ajitesh, Developer</div>
+                    <div class="endorsement-card glass-card tilt-card" aria-hidden="true">
+                        <div class="tilt-inner">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Insane eye for detail. The UI feels like butter."</p>
+                            <div class="author">— Ajitesh, Developer</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -268,30 +282,33 @@
             <h2 class="section-badge">/ connect</h2>
             <div class="contact-grid">
                 
-                <div class="contact-methods glass-card float-anim-2">
-                    <h3>Hit me up</h3>
-                    <div class="contact-link group" data-copy="smoly">
-                        <div class="icon"><svg viewBox="0 0 127.14 96.36" fill="currentColor" width="24"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77.7,77.7,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.16,46,96.06,53,91.08,65.69,84.69,65.69Z"/></svg></div>
-                        <div class="info">
-                            <span class="label">Discord</span>
-                            <span class="value">smoly</span>
+                <div class="contact-methods glass-card float-anim-2 tilt-card">
+                    <div class="tilt-inner">
+                        <h3>Hit me up</h3>
+                        <div class="contact-link group" data-copy="smoly">
+                            <div class="icon"><svg viewBox="0 0 127.14 96.36" fill="currentColor" width="24"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77.7,77.7,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.16,46,96.06,53,91.08,65.69,84.69,65.69Z"/></svg></div>
+                            <div class="info">
+                                <span class="label">Discord</span>
+                                <span class="value">smoly</span>
+                            </div>
+                            <div class="copy-badge">Copy</div>
                         </div>
-                        <div class="copy-badge">Copy</div>
-                    </div>
-                    
-                    <div class="contact-link group" data-copy="hosttanmayrathi@gmail.com">
-                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
-                        <div class="info">
-                            <span class="label">Email</span>
-                            <span class="value">hosttanmayrathi@gmail.com</span>
+                        
+                        <div class="contact-link group" data-copy="hosttanmayrathi@gmail.com">
+                            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                            <div class="info">
+                                <span class="label">Email</span>
+                                <span class="value">hosttanmayrathi@gmail.com</span>
+                            </div>
+                            <div class="copy-badge">Copy</div>
                         </div>
-                        <div class="copy-badge">Copy</div>
                     </div>
                 </div>
 
-                <div class="suggestion-area">
-                    <div class="suggestion-form glass-card float-anim-3">
-                        <h3>Drop a suggestion</h3>
+                <div class="suggestion-area tilt-card">
+                    <div class="tilt-inner">
+                        <div class="suggestion-form glass-card float-anim-3">
+                            <h3>Drop a suggestion</h3>
                         <div class="input-wrapper">
                             <input type="text" id="suggestion-input" placeholder="Type something cool..." autocomplete="off">
                             <button id="suggestion-submit" aria-label="Submit Suggestion">
@@ -314,19 +331,17 @@
         </section>
 
         <footer>
-            <div class="footer-content">
-                <p>Designed with chaos & precision. © 2026 Tanmay Rathi</p>
-                <div class="scroll-top" id="scroll-top">Back to top ↑</div>
+            <div class="footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 2rem; padding: 4rem 0;">
+                <p style="opacity: 0.6;">Designed with chaos & precision. © 2026 Tanmay Rathi</p>
+                <div class="magnetic-wrap">
+                    <button id="scroll-top" class="action-btn" style="padding: 1.2rem 3rem; font-size: 1.1rem; border: 2px solid var(--accent); background: transparent; color: var(--accent);">🚀 Take me back to the top</button>
+                </div>
             </div>
         </footer>
 
     </main>
 
-        <!-- Easter Egg: Subtle Cursor‑Following Eyes -->
-        <div class="easter-eyes" aria-hidden="true">
-            <div class="eye"><div class="pupil"></div></div>
-            <div class="eye"><div class="pupil"></div></div>
-        </div>
+
 
     <!-- Youtube Iframe API for the hidden media player -->
     <script src="https://www.youtube.com/iframe_api"></script>
