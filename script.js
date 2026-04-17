@@ -3,6 +3,9 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Flag for CSS reveal logic
+    document.documentElement.classList.add('js-enabled');
+
     
     // --- 1. CUSTOM CURSOR & EFFECTS ---
     const cursor = document.getElementById("cursor");
@@ -236,33 +239,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 11. SCROLL REVEAL (Advanced) ---
-    const revealItems = document.querySelectorAll(".glass-card, .bento-card, .game-item, .hologram-card");
+    // --- 11. SCROLL REVEAL (Performance Optimized) ---
+    const revealItems = document.querySelectorAll(".reveal-item");
     const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Add a staggered delay
-                setTimeout(() => {
-                    entry.target.classList.add("revealed");
-                }, index * 100);
+                entry.target.classList.add("revealed");
             }
         });
     }, { threshold: 0.1 });
 
-    revealItems.forEach(item => {
-        item.style.opacity = "0";
-        item.style.transform = "translateY(30px)";
-        item.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-        revealObserver.observe(item);
-    });
-
-    // Add CSS for revealed state dynamically or via CSS file
-    const style = document.createElement("style");
-    style.textContent = ".revealed { opacity: 1 !important; transform: translateY(0) !important; }";
-    document.head.appendChild(style);
-
-    // Initial check for non-JS users or immediate view
-    document.querySelectorAll(".glass-card").forEach(c => c.classList.add("revealed"));
+    revealItems.forEach(item => revealObserver.observe(item));
 
     // Back to top
     const scrollTopBtn = document.getElementById("scroll-top");

@@ -1316,7 +1316,44 @@ footer {
 
 
 
-/* --- RESPONSIVE DESIGN --- */
+/* --- REVEAL EFFECTS (Performance Optimized) --- */
+.reveal-item {
+    opacity: 1; /* Default to visible for SEO and slow JS */
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* If JS is active, hide them before reveal */
+.js-enabled .reveal-item:not(.hero-text) {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.reveal-item.revealed {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* --- AMBIENT DUST (GPU Optimized) --- */
+#ambient-dust {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.dust-particle {
+    position: absolute;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.15;
+    filter: blur(1px);
+    will-change: transform;
+    pointer-events: none;
+    transition: transform 0.5s ease-out; /* Smooth mouse response */
+}
+
 @media (max-width: 900px) {
     .hero-container, .contact-grid { grid-template-columns: 1fr; }
     .hero-image { order: -1; max-width: 400px; margin: 0 auto; }
